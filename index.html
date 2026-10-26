@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3efe6">
+  <meta name="description" content="The Honest Mirror reads a photograph with YouCam Skin Analysis, shows the raw score next to the filtered claim, and recommends a product only when a specific raw score is under its line.">
+  <title>The Honest Mirror</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,500..650&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="show-filtered">
+  <div class="app">
+    <header>
+      <a class="brand" href="./">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="5" y="3" width="22" height="26" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+          <path d="M16 3v26" stroke="currentColor" stroke-width="1.5"></path>
+        </svg>
+        <span>
+          <p class="kicker">YouCam Skin AI · Apparel try-on</p>
+          <h1 class="wordmark">The Honest Mirror</h1>
+        </span>
+      </a>
+      <div class="header-actions">
+        <label class="switch">
+          <input id="filterToggle" type="checkbox" checked>
+          <span class="switch-ui" aria-hidden="true"></span>
+          <span class="wide">Show the filtered claim</span>
+          <span class="narrow">Filtered claim</span>
+        </label>
+        <button type="button" class="ghost" id="keyButton">Key needed</button>
+      </div>
+    </header>
+    <p id="rehearsalBanner" class="banner" hidden>Rehearsal. This photograph is a sample. The numbers were not measured from it, and YouCam was not called.</p>
+    <main id="stage"></main>
+    <footer>
+      <p>The Honest Mirror prints what the model measured. It is not a dermatologist and not a medical device. Higher means the model sees a healthier surface in that photograph.</p>
+      <p>raw_score is the model. ui_score is YouCam’s documented kinder adjustment. A product is offered only when a raw score is under its line, and the receipt names that score.</p>
+      <p><a href="https://docs.perfectcorp.com/reference/ai_skin_analysis">Skin Analysis docs</a> · <a href="https://docs.perfectcorp.com/reference/ai_clothes">Apparel try-on docs</a></p>
+    </footer>
+  </div>
+
+  <dialog id="keyDialog">
+    <h2>YouCam API key</h2>
+    <p>Paste the key from the registration email. The free allotment is 1,000 units. A full reading is 16 units at standard detail, or 22 at high detail, and only if it succeeds.</p>
+    <p class="fine" id="keySource">No key yet.</p>
+    <label for="keyInput">Key</label>
+    <input id="keyInput" type="password" autocomplete="off" spellcheck="false" placeholder="Paste key">
+    <label class="check"><input id="revealKey" type="checkbox"> Show key</label>
+    <div class="row">
+      <button type="button" class="primary" id="saveKey">Save in this browser</button>
+      <button type="button" class="ghost" id="forgetKey">Forget saved key</button>
+      <button type="button" class="ghost" id="closeKey">Close</button>
+    </div>
+    <p class="fine">A key saved here overrides config.js on this browser. config.js is where a key belongs if you are running the files yourself. Do not commit a real key.</p>
+  </dialog>
+
+  <script src="config.js"></script>
+  <script src="js/honesty.js"></script>
+  <script src="js/youcam.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
